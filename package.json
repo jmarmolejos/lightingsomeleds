@@ -1,0 +1,8 @@
+{
+  "name": "LightingSomeLeds",
+  "description": "Killing time with nodejs and an arduino board.",
+  "version": "0.0.1",
+  "dependencies": {
+    "johnny-five": "*"
+  }
+}
