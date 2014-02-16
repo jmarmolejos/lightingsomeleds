@@ -10,7 +10,7 @@ myBoard.on('ready', function() {
   redLed = new j5.Led(12);
   blueLed = new j5.Led(11);
   
-  checkPage('www.cnn.com');
+  checkPage('www.example.com');
 
   this.repl.inject({
 		blueLed: blueLed,
