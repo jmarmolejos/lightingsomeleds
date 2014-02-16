@@ -5,17 +5,28 @@ var myBoard, greenLed, redLed, blueLed;
 
 myBoard = new j5.Board();
 
-myBoard.on("ready", function() {
-
+myBoard.on('ready', function() {
   greenLed = new j5.Led(13);
   redLed = new j5.Led(12);
   blueLed = new j5.Led(11);
   
-  var options = {
-    host: 'www.google.com',
+  checkPage('www.cnn.com');
+
+  this.repl.inject({
+		blueLed: blueLed,
+		redLed: redLed,
+		greenLed: greenLed,
+		checkPage: checkPage
+  });
+});
+
+function checkPage(url) {
+	turnAllLedsOff();
+	
+	var options = {
+    host: url,
     port: 80,
-    method: 'GET',
-    path:'/foo'
+    method: 'GET'
   };
   
   blueLed.strobe(800);
@@ -33,11 +44,19 @@ myBoard.on("ready", function() {
     blueLed.off();  
   });
   
+  req.on('error', function(){
+  	turnAllLedsOff();
+  	redLed.on();
+  	console.log('Uh oh, something went wrong.');
+  })
+  
   req.write('data\n');   //Write some data into request
   req.write('data\n');
   req.end();
+}
 
-  this.repl.inject({
-      led: blueLed
-  });
-});
+function turnAllLedsOff() {
+	blueLed.off();
+	greenLed.off();
+	redLed.off();
+}
