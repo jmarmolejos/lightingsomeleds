@@ -1,0 +1,4 @@
+lightingsomeleds
+================
+
+Some very simple code to play around with some leds using nodejs and johnny-five to interact with the arduino board.
